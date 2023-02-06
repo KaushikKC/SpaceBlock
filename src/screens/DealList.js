@@ -5,6 +5,7 @@ import Navbar from '../component/Navbar';
 function DealList() {
   const [select, setSelect] = useState(false)
   const [seleted, setSelected] = useState()
+  const [acc, setAcc] = useState('');
   const data = [
     { DealId: 23573469, CreateTime: '2023-02-01 18:57', Client: "f1vm....el5i", Provider: 'f01859603', PieceSize: '32.00 GiB', VerfiedDeal: 'true', StorageFee: 'N/A', Status: 'N/A', },
     { DealId: 23573469, CreateTime: '2023-02-01 18:57', Client: "f1vm....el5i", Provider: 'f01859603', PieceSize: '32.00 GiB', VerfiedDeal: 'true', StorageFee: 'N/A', Status: 'N/A', },
@@ -16,18 +17,23 @@ function DealList() {
 
   const navigate = useNavigate();
 
+  const AccountType = (acc) => {
+    console.log(acc)
+    setAcc(acc)
+  }
+
   const ClickDeal = (key) => {
     setSelect(true)
     setSelected(key)
   }
   return (
     <div>
-        <Navbar />
+        <Navbar AccountType={AccountType} />
         <div className='px-[222px] '>
           <div className='py-[40px] flex justify-between'>
             <h1 className='font-semibold text-2xl'>Storage Deal List</h1>
             {select && 
-              <button onClick={() => navigate('/createblock')} className='px-[42px] py-[8px] text-white font-semibold bg-black rounded-md'>Create Block</button>
+              <button onClick={() => navigate(`${acc == 'Provider' ? '/createblock' : '/planlist'}`)} className='px-[42px] py-[8px] text-white font-semibold bg-black rounded-md'>Create Block</button>
             }
           </div>
           <div className='flex justify-center'>
